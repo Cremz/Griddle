@@ -250,11 +250,9 @@ var GridTable = React.createClass({
         </tr></tbody>)
     }
 
-    var footerContent = <div />;
+    var footerContent = <tbody />;
     if(this.props.useCustomFooterComponent){
-      var that = this;
-
-      footerContent = <that.props.customFooterComponent results={this.props.data} />;
+      var footerContent = this.props.customFooterComponent;
     }
 
     // If we have a fixed header, split into two tables.
@@ -262,6 +260,7 @@ var GridTable = React.createClass({
       if (this.props.useGriddleStyles) {
         tableStyle.tableLayout = "fixed";
       }
+
       return <div>
               <table className={this.props.className} style={(this.props.useGriddleStyles&&tableStyle)||null}>
                 {tableHeading}
@@ -273,7 +272,9 @@ var GridTable = React.createClass({
                     {pagingContent}
                 </table>
               </div>
-              {footerContent}
+              <table className={this.props.className} style={(this.props.useGriddleStyles&&tableStyle)||null}>
+                {footerContent}
+              </table>
             </div>;
     }
 
