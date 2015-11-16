@@ -124,7 +124,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            useCustomRowComponent: false,
 	            useCustomGridComponent: false,
 	            useCustomPagerComponent: false,
-	            useCustomFooterComponent: false,
 	            useCustomFilterer: false,
 	            useCustomFilterComponent: false,
 	            useGriddleStyles: true,
@@ -132,7 +131,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            customRowComponent: null,
 	            customGridComponent: null,
 	            customPagerComponent: {},
-	            customFooterComponent: null,
 	            customFilterComponent: null,
 	            customFilterer: null,
 	            enableToggleCustom: false,
@@ -142,7 +140,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	            showTableHeading: true,
 	            showPager: true,
 	            useFixedHeader: false,
-	            useFixedFooter: false,
 	            useExternal: false,
 	            externalSetPage: null,
 	            externalChangeSort: null,
@@ -749,8 +746,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                nextPage: this.nextPage,
 	                showTableHeading: this.props.showTableHeading,
 	                useFixedHeader: this.props.useFixedHeader,
-	                useCustomFooterComponent: this.props.useCustomFooterComponent,
-	                customFooterComponent: this.props.customFooterComponent,
 	                parentRowCollapsedClassName: this.props.parentRowCollapsedClassName,
 	                parentRowExpandedClassName: this.props.parentRowExpandedClassName,
 	                parentRowCollapsedComponent: this.props.parentRowCollapsedComponent,
@@ -1466,18 +1461,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      );
 	    }
 
-	    var footerContent = React.createElement("div", null);
-	    if (this.props.useCustomFooterComponent) {
-	      var that = this;
-
-	      footerContent = React.createElement(that.props.customFooterComponent, { results: this.props.data });
-	    }
-
 	    // If we have a fixed header, split into two tables.
 	    if (this.props.useFixedHeader) {
 	      if (this.props.useGriddleStyles) {
 	        tableStyle.tableLayout = "fixed";
 	      }
+
 	      return React.createElement(
 	        "div",
 	        null,
@@ -1496,8 +1485,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            loadingContent,
 	            pagingContent
 	          )
-	        ),
-	        footerContent
+	        )
 	      );
 	    }
 
