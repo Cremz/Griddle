@@ -691,6 +691,7 @@ var Griddle = React.createClass({
                 showPager={this.props.showPager}
                 pagingContent={pagingContent}
                 data={data}
+                results={this.getCurrentResults()}
                 className={this.props.tableClassName}
                 enableInfiniteScroll={this.isInfiniteScrollEnabled()}
                 nextPage={this.nextPage}
