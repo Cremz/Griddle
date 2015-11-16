@@ -58,6 +58,7 @@ var Griddle = React.createClass({
             "useCustomRowComponent": false,
             "useCustomGridComponent": false,
             "useCustomPagerComponent": false,
+            "useCustomBottomComponent": false,
             "useCustomFilterer": false,
             "useCustomFilterComponent": false,
             "useGriddleStyles": true,
@@ -66,6 +67,7 @@ var Griddle = React.createClass({
             "customGridComponent": null,
             "customPagerComponent": {},
             "customFilterComponent": null,
+            "customBottomComponent": null,
             "customFilterer": null,
             "enableToggleCustom":false,
             "noDataMessage":"There is no data to display.",
@@ -616,6 +618,14 @@ var Griddle = React.createClass({
             </button> :
             "");
     },
+    getBottomSection: function(results){
+      if(this.props.useCustomBottomComponent) {
+        var that = this;
+        return <that.props.customBottomComponent results={results}/>
+      } else {
+        return "";
+      }
+    },
     getTopSection: function(filter, settings){
         if (this.props.showFilter === false && this.props.showSettings === false){
             return "";
@@ -745,6 +755,7 @@ var Griddle = React.createClass({
 
         //if we have neither filter or settings don't need to render this stuff
         var topSection = this.getTopSection(filter, settings);
+        var bottomSection = this.getBottomSection(results);
 
         var keys = [];
         var cols = this.columnSettings.getColumns();
@@ -790,6 +801,7 @@ var Griddle = React.createClass({
                 <div className="griddle-container" style={this.props.useGriddleStyles&&!this.props.isSubGriddle? { border: "1px solid #DDD"} : null }>
                     {resultContent}
                 </div>
+                {bottomSection}
             </div>
         );
 
