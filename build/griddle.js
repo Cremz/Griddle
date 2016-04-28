@@ -349,7 +349,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._resetSelectedRows();
 	    },
 	    componentWillReceiveProps: function (nextProps) {
-	        this.setMaxPage(nextProps.results);
+					var current_results = this.getCurrentResults();
+					this.setMaxPage(current_results);
 
 	        if (nextProps.columns !== this.columnSettings.filteredColumns) {
 	            this.columnSettings.filteredColumns = nextProps.columns;
@@ -357,7 +358,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	        if (nextProps.selectedRowIds) {
-	            var visibleRows = this.getDataForRender(this.getCurrentResults(), this.columnSettings.getColumns(), true);
+	            var visibleRows = this.getDataForRender(current_results, this.columnSettings.getColumns(), true);
 
 	            this.setState({
 	                isSelectAllChecked: this._getAreAllRowsChecked(nextProps.selectedRowIds, _.pluck(visibleRows, this.props.uniqueIdentifier)),
