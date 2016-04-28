@@ -350,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._resetSelectedRows();
 	    },
 	    componentWillReceiveProps: function (nextProps) {
-					var current_results = this.getCurrentResults();
+	        var current_results = this.getCurrentResults();
 	        this.setMaxPage(current_results);
 
 	        if (nextProps.columns !== this.columnSettings.filteredColumns) {
@@ -698,7 +698,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	    getPagingSection: function (currentPage, maxPage) {
 	        if ((this.props.showPager && !this.isInfiniteScrollEnabled() && !this.props.useCustomGridComponent) === false) {
-	            return "";
+	            return undefined;
 	        }
 
 	        return React.createElement(
@@ -1219,7 +1219,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      rowHeight: null,
 	      infiniteScrollLoadTreshold: null,
 	      bodyHeight: null,
-	      tableHeading: "",
 	      useGriddleStyles: true,
 	      useGriddleIcons: true,
 	      isSubGriddle: false,
@@ -1250,7 +1249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  gridScroll: function () {
 	    if (this.props.enableInfiniteScroll && !this.props.externalIsLoading) {
 	      // If the scroll height is greater than the current amount of rows displayed, update the page.
-	      var scrollable = this.refs.scrollable.getDOMNode();
+	      var scrollable = this.refs.scrollable;
 	      var scrollTop = scrollable.scrollTop;
 	      var scrollHeight = scrollable.scrollHeight;
 	      var clientHeight = scrollable.clientHeight;
@@ -1431,7 +1430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      sortSettings: this.props.sortSettings,
 	      multipleSelectionSettings: this.props.multipleSelectionSettings,
 	      columnSettings: this.props.columnSettings,
-	      rowSettings: this.props.rowSettings }) : "";
+	      rowSettings: this.props.rowSettings }) : undefined;
 
 	    //check to see if any of the rows have children... if they don't wrap everything in a tbody so the browser doesn't auto do this
 	    if (!anyHasChildren) {
@@ -1927,7 +1926,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var defaults = _.object(columns, []);
 
 	        // creates a 'view' on top the data so we will not alter the original data but will allow us to add default values to missing columns
-	        var dataView = Object.create(this.props.data);
+	        var dataView = _.extend(this.props.data);
 
 	        _.defaults(dataView, defaults);
 
@@ -2341,7 +2340,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              { colSpan: that.props.columnSettings.getVisibleColumnCount(), className: "griddle-parent", style: that.props.useGriddleStyles ? { border: "none", padding: "0 0 0 5px" } : null },
 	              React.createElement(Griddle, { isSubGriddle: true, results: [row], columns: that.props.columnSettings.getColumns(), tableClassName: that.props.tableClassName, parentRowExpandedClassName: that.props.parentRowExpandedClassName,
 	                parentRowCollapsedClassName: that.props.parentRowCollapsedClassName,
-	                showTableHeading: false, showPager: false, columnMetadata: that.props.columnMetadata,
+	                showTableHeading: false, showPager: false, columnMetadata: that.props.columnSettings.columnMetadata,
 	                parentRowExpandedComponent: that.props.parentRowExpandedComponent,
 	                parentRowCollapsedComponent: that.props.parentRowCollapsedComponent,
 	                paddingHeight: that.props.paddingHeight, rowHeight: that.props.rowHeight })
@@ -2349,7 +2348,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          );
 	        }
 
-	        return React.createElement(that.props.rowSettings.rowComponent, { useGriddleStyles: that.props.useGriddleStyles, isSubGriddle: that.props.isSubGriddle, data: row, columnSettings: that.props.columnSettings, isChildRow: true, columnMetadata: that.props.columnMetadata, key: that.props.rowSettings.getRowKey(row) });
+	        return React.createElement(that.props.rowSettings.rowComponent, { useGriddleStyles: that.props.useGriddleStyles, isSubGriddle: that.props.isSubGriddle, data: row, columnSettings: that.props.columnSettings, isChildRow: true, columnMetadata: that.props.columnSettings.columnMetadata, key: that.props.rowSettings.getRowKey(row) });
 	      });
 	    }
 
