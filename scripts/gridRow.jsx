@@ -28,26 +28,26 @@ var GridRow = React.createClass({
 	    "multipleSelectionSettings": null
       }
     },
-    handleClick: function(e){
-        if(this.props.onRowClick !== null && _.isFunction(this.props.onRowClick) ){
-            this.props.onRowClick(this, e);
-        }else if(this.props.hasChildren){
-            this.props.toggleChildren();
-        }
+    handleClick: function (e) {
+      if (this.props.onRowClick !== null && _.isFunction(this.props.onRowClick) && (e.target.parentElement.tagName === "A" || e.target.name === "shop_code[]")) {
+          this.props.onRowClick(this, e);
+      } else if (this.props.hasChildren) {
+          this.props.toggleChildren();
+      }
     },
     handleSelectionChange: function(e) {
       //hack to get around warning that's not super useful in this case
       return;
     },
-	handleSelectClick: function(e) {
-		if(this.props.multipleSelectionSettings.isMultipleSelection) {
-			if(e.target.type === "checkbox") {
-				this.props.multipleSelectionSettings.toggleSelectRow(this.props.data, this.refs.selected.getDOMNode().checked);
-			} else {
-				this.props.multipleSelectionSettings.toggleSelectRow(this.props.data, !this.refs.selected.getDOMNode().checked)
-			}
-		}
-	},
+  	handleSelectClick: function(e) {
+  		if(this.props.multipleSelectionSettings.isMultipleSelection) {
+  			if(e.target.type === "checkbox") {
+  				this.props.multipleSelectionSettings.toggleSelectRow(this.props.data, this.refs.selected.getDOMNode().checked);
+  			} else {
+  				this.props.multipleSelectionSettings.toggleSelectRow(this.props.data, !this.refs.selected.getDOMNode().checked)
+  			}
+  		}
+  	},
     verifyProps: function(){
         if(this.props.columnSettings === null){
            console.error("gridRow: The columnSettings prop is null and it shouldn't be");
