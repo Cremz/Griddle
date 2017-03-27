@@ -414,6 +414,11 @@ var Griddle = React.createClass({
                 if(this.state.sortAscending === false){
                     data.reverse();
                 }
+                if (this.props.sortWithUnspecified) {
+                  data = _.sortBy(data, function (item) {
+                    return item.unspecified ? 1 : -1;
+                  });
+                }
             }
 
             var currentPage = this.getCurrentPage();

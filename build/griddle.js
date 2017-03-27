@@ -467,12 +467,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (this.state.sortAscending === false) {
 	                data.reverse();
 	            }
-
-              if (this.props.sortWithUnspecified) {
-                data = _.sortBy(data, function (item) {
-                  return item.unspecified ? 1 : -1;
-                });
-              }
+	            if (this.props.sortWithUnspecified) {
+	                data = _.sortBy(data, function (item) {
+	                    return item.unspecified ? 1 : -1;
+	                });
+	            }
 	        }
 
 	        var currentPage = this.getCurrentPage();
@@ -1322,7 +1321,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // If we have a row height specified, only render what's going to be visible.
 	      if (this.props.enableInfiniteScroll && this.props.rowHeight !== null && this.refs.scrollable !== undefined) {
 	        var adjustedHeight = that.getAdjustedRowHeight();
-	        var visibleRecordCount = Math.ceil(that.state.clientHeight / adjustedHeight);
+	        var visibleRecordCount = Math.ceil(that.state.clientHeight / adjustedHeight) + 8;
 
 	        // Inspired by : http://jsfiddle.net/vjeux/KbWJ2/9/
 	        var displayStart = Math.max(0, Math.floor(that.state.scrollTop / adjustedHeight) - visibleRecordCount * 0.25);
